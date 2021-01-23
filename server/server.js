@@ -15,32 +15,18 @@ const rooms = {}
 
 io.on('connection', socket => {
 
-  socket.on('join-room', roomId => {
+  socket.on('join-room', (roomId, userId) => {
     socket.join(roomId)
-    socket.emit("socket-id",socket.id)
-    socket.to(roomId).emit('other-join',socket.id)
+    socket.to(roomId).broadcast.emit('user-connected', userId)
+
+    socket.on('disconnect', () => {
+      socket.to(roomId).broadcast.emit('user-disconnected', userId)
+    })
+  })
+  socket.on('stop-sharing', roomId => {
+    socket.to(roomId).emit('stop-sharing')
   })
 
-  socket.on('leave-room', roomId => {
-    socket.leave(roomId)
-    socket.to(roomId).emit('someone-leave',socket.id)
-  })
-
-  socket.on('sharing', (roomId) => {
-    socket.to(roomId).emit('someone-sharing')
-  })
-
-  socket.on("offer", payload => {
-    io.to(payload.target).emit("offer", payload);
-  });
-
-  socket.on("answer", payload => {
-    io.to(payload.target).emit("answer", payload);
-  });
-
-  socket.on("ice-candidate", payload => {
-    io.to(payload.target).emit("ice-candidate", payload.candidate);
-  });
 })
 
 server.listen(3005, () => console.log(`server on port ${3005}`))
