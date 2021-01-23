@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+# ACb2404669780abcfc02ea8be631147e69 account sid
+# SK8ba33763ed4392ee166bdbb60db99dc8 api key
+# 8JSQVkwg92S5GS4HGj0pDUpRaGZkZLB3 api secret
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
