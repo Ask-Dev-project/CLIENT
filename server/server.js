@@ -3,19 +3,30 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["allow"],
-    credentials: true
+    origin: "*",
+    // methods: ["GET", "POST"],
+    // allowedHeaders: ["allow"],
+    // credentials: true
   }
 })
+app.use(express.json())
 
-// const users = {}
-const rooms = {}
+const rooms= {}
+
+app.get('/listRoom',(req,res)=> {
+  res.status(200).json(rooms)
+})
 
 io.on('connection', socket => {
 
-  socket.on('join-room', (roomId, userId) => {
+  socket.on('join-room', (roomId, userId,jwt) => {
+    if(rooms[roomId]) {
+      rooms[roomId][jwt] = userId
+    }else{
+      rooms[roomId] = {
+        [jwt] : userId
+      }
+    }
     socket.join(roomId)
     socket.to(roomId).broadcast.emit('user-connected', userId)
 
@@ -24,7 +35,10 @@ io.on('connection', socket => {
     })
   })
   socket.on('stop-sharing', roomId => {
-    socket.to(roomId).emit('stop-sharing')
+    socket.to(roomId).broadcast.emit('stop-sharing')
+  })
+  socket.on('give-my-id', obj => {
+    socket.to(obj.roomId).broadcast.emit('give-other-id',obj.ownPeerId)
   })
 
 })
