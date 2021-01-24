@@ -5,6 +5,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import Forum from './pages/QuestionForum'
 
 function App() {
   return (
@@ -18,9 +19,7 @@ function App() {
         <ChatRoom />
       </Route>
       <Route path='/post/:id'>
-        <div>
-          <p>ini untuk postingan</p>
-        </div>
+        <Forum />
       </Route>
     </Switch>
     

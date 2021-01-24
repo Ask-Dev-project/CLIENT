@@ -1,5 +1,6 @@
 import NavBar from '../components/NavBar'
 import { useState } from 'react'
+import ChatBubbles from '../components/ChatBubble'
 
 export default function ChatRoom() {
   const [input, setInput] = useState('')
@@ -36,15 +37,10 @@ export default function ChatRoom() {
             </div>
             <div className='row'>
           <ul>
-            <li class="him">
-            This is some text within a card body.       
-            </li>
-            <li class="me">By this User, first message</li>
-            <li class="me">By this User, secondmessage</li>
-            <li class="me">By this User, third message</li>
-            <li class="me">By this User, fourth message</li>
-            <li class="me">By this User, fifth message</li>
-            <li class="me">By this User, sixth message</li>
+            <ChatBubbles typer='him' msg='yes whats up'></ChatBubbles>
+            <ChatBubbles typer='me' msg='nothing much'></ChatBubbles>
+            <ChatBubbles typer='him' msg='crazy bastard'></ChatBubbles>
+            <ChatBubbles typer='me' msg='wtf bro'></ChatBubbles>
           </ul>
         </div>
         <div className="footer mt-auto py-3 bg-light">
