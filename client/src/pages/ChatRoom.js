@@ -1,6 +1,5 @@
-import NavBar from '../components/NavBar'
 import { useState } from 'react'
-import ChatBubbles from '../components/ChatBubble'
+import {ChatBubbles, NavBar} from '../components'
 
 export default function ChatRoom() {
   const [input, setInput] = useState('')
