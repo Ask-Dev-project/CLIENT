@@ -22,8 +22,8 @@ function Room(){
   })
   const peer = new Peer(undefined,{
     host: '192.168.0.6',
-    port: '3001',
-    path: '/'
+    port: '3002',
+    path: '/peerjs/myapp'
   })
   const peers = {}
 
@@ -53,7 +53,8 @@ function Room(){
     
     peer.on('open', id => {
       ownPeerId.current = id
-      socket.emit('join-room', params.id, id)
+      let jwt = localStorage.getItem('access_token')
+      socket.emit('join-room', params.id, id,jwt)
     })
     peer.on('call', call => {
       navigator.mediaDevices.getDisplayMedia({video:false,audio:false})

@@ -9,7 +9,14 @@ const io = require('socket.io')(server, {
     // credentials: true
   }
 })
+// const { ExpressPeerServer } = require('peer')
+// const peerServer = ExpressPeerServer(server,{
+//   path: '/',
+//   debug: true
+// })
+
 app.use(express.json())
+// app.use('/peer',peerServer)
 
 const rooms= {}
 
