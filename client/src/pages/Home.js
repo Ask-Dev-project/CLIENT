@@ -31,7 +31,6 @@ function Home() {
         }
       })
         .then(({data}) => {
-          console.log(data)
           setPosts(data)
           setLoadingPost(false)
         }).catch(err => console.log(err))
@@ -39,7 +38,6 @@ function Home() {
       setPosts([])
       axios.get('http://localhost:3005/post')
       .then(({data}) => {
-        console.log(data);
         setPosts(data)
         setLoadingPost(false)
         setInit(false)
@@ -50,7 +48,6 @@ function Home() {
   useEffect(()=>{
     axios.get('http://localhost:3005/post')
       .then(({data}) => {
-        console.log(data);
         setPosts([])
         setPosts(posts.concat(data))
         setLoadingPost(false)

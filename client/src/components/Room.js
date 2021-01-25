@@ -34,7 +34,7 @@ function Room(){
   const [partnerVideoStart, setPartnerVideoStart] = useState(false)
 
   const [allChat,setAllChat] = useState([])
-  console.log(allChat, '<< top level');
+  // const allChat = useRef([])
   // const socket = io('http://localhost:3005')
 
   const peer = new Peer(undefined)
@@ -42,17 +42,13 @@ function Room(){
   const [input, setInput] = useState('')
 
   const handleNewChat = (message) => {
-    let newBubbleChat = {
-      owner: 'him',
-      message: message
-    }
-    console.log(allChat,'<<<<< all'); // []
-    let newArr = allChat.concat(newBubbleChat) // [...allChat,newBubbleChat]
-    console.log(newArr) // [{...}]
-    setAllChat(() => {
-      return newArr
-    })
-    console.log(allChat,'<<< setelah set');
+    // let newBubbleChat = {
+    //   owner: 'him',
+    //   message: message
+    // }
+    // let newArr = allChat.concat(newBubbleChat) // [...allChat,newBubbleChat]
+    // console.log(allChat,newArr,'<<< handle');
+    setAllChat(message)
   }
 
   const forceStopSharing = () => {
@@ -60,17 +56,19 @@ function Room(){
       videoRef.current.srcObject.getTracks().forEach( track => {
         track.stop()
       })
+      socketRef.current.emit('stop-sharing',params.id)
     }
     if(partnerVideoStart){
       partnerVideoRef.current.srcObject.getTracks().forEach( track => {
         track.stop()
       })
+      socketRef.current.emit('stop-sharing',params.id)
     }
   }
 
-  useEffect(()=>{
-    console.log(allChat,'<<< dari use effect')
-  },[allChat])
+  // useEffect(()=>{
+  //   console.log(allChat,'<<< dari use effect')
+  // },[allChat])
 
   useEffect(() => {
     socketRef.current = io.connect('http://localhost:3005')
@@ -79,7 +77,8 @@ function Room(){
       socketRef.current.emit('give-my-id',{ownPeerId: ownPeerId.current,roomId:params.id})
     })
     socketRef.current.on('receive-chat',message => {
-      console.log(allChat, '<<< dari receive');
+      console.log(message);
+      // console.log(allChat, '<<< dari receive');
       handleNewChat(message)
     })
     socketRef.current.on('listUser',payload => {
@@ -90,10 +89,11 @@ function Room(){
       console.log(userId, '<<< userId')
     })
     socketRef.current.on('stop-sharing', () => {
-      partnerVideoRef.current.srcObject.getTracks().forEach(track => {
-        track.stop()
-      })
-      partnerVideoRef.current.srcObject = null
+      forceStopSharing()
+      // partnerVideoRef.current.srcObject.getTracks().forEach(track => {
+      //   track.stop()
+      // })
+      // partnerVideoRef.current.srcObject = null
       setPartnerVideoStart(false)
     })
     socketRef.current.on('give-other-id',otherId => {
@@ -136,6 +136,7 @@ function Room(){
     return () =>{
       socketRef.current.disconnect()
       forceStopSharing()
+      socketRef.current.emit('stop-sharing',params.id)
     } 
 
     // eslint-disable-next-line
@@ -176,15 +177,16 @@ function Room(){
 
   function send(){
     let newBubble = {
-      owner: 'me',
+      owner: localStorage.getItem('access_token'),
       message: input
     }
     let newObj = {
       roomId : params.id,
-      message: input
+      message: [...allChat,newBubble]
     }
     socketRef.current.emit('send-chat',newObj)
     setAllChat([...allChat,newBubble])
+    // allChat.current = [...allChat.current,newBubble]
     setInput('')
   }
 
@@ -226,7 +228,8 @@ function Room(){
           <ul>
             {
               allChat.map((chat) => {
-                return <ChatBubbles key={chat.message} typer={chat.owner} msg={chat.message}/>
+                let owner = localStorage.getItem('access_token') === chat.owner ? 'me' : 'him'
+                return <ChatBubbles key={chat.message} typer={owner} msg={chat.message}/>
               })
             }
           </ul>
