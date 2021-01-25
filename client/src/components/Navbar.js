@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-export default function Navbar() {
+export default function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
       <NavLink exact to="/" activeStyle={{textDecoration:'underline'}} className="btn">Home</NavLink>
