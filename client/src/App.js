@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 import './App.css';
 import Room from './components/Room'
-import {Forum, ChatRoom, ProfilePage,Home} from './pages'
+import { ChatRoom, Home } from './pages'
 
 function App() {
   return(
