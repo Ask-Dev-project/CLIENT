@@ -26,7 +26,7 @@ function App() {
     </Switch>
   </BrowserRouter>
   )
-
+}
 
 function App2() {
   return (
