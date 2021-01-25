@@ -19,6 +19,10 @@ function App() {
       <Route path="/chatRoom">
         <ChatRoom/>
       </Route>
+      <Route path="/posts/:id">
+        <Forum />
+      </Route>
+      
     </Switch>
   )
 }
