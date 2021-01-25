@@ -20,11 +20,7 @@ function Room(){
     //   allow: "abcd"
     // }
   })
-  const peer = new Peer(undefined,{
-    host: '192.168.0.6',
-    port: '3002',
-    path: '/peerjs/myapp'
-  })
+  const peer = new Peer(undefined)
   const peers = {}
 
   useEffect(() => {
