@@ -14,7 +14,7 @@ function Room(){
   const otherUserId = useRef()
   const [ownVideoStart, setOwnVideoStart] = useState(false)
   const [partnerVideoStart, setPartnerVideoStart] = useState(false)
-  const socket = io('http://192.168.0.6:3005',{
+  const socket = io('http://localhost:3005',{
     // withCredentials: true,
     // extraHeaders: {
     //   allow: "abcd"
