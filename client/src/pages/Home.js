@@ -74,22 +74,29 @@ function Home() {
               <Link to="?category=Cs" className="btn">C#</Link>
             </div>
           </div>
-          <div className="col-7" style={{minHeight:'200px'}}>
-            {
-              loadingPost ?
-              <LoadingSpin/>
-              :
-              posts.map(post => {
-                return <CardPost key={post.id} post={post}/>
-              })
-            }
-          </div>
-          <div className="col-3 bg-warning" style={{minHeight:'200px',gap:'7px'}}>
-            {
-              rooms.map(room => {
-                return <CardRoom key={room} roomId={room}/>
-              })  
-            }
+          <div className="col-10">
+            <div className="row">
+              <h2>FORM posting</h2>
+            </div>
+            <div className="row">
+              <div className="col-9" style={{minHeight:'200px'}}>
+                {
+                  loadingPost ?
+                  <LoadingSpin/>
+                  :
+                  posts.map(post => {
+                    return <CardPost key={post.id} post={post}/>
+                  })
+                }
+              </div>
+              <div className="col-3 bg-warning" style={{minHeight:'200px',gap:'7px'}}>
+                {
+                  rooms.map(room => {
+                    return <CardRoom key={room} roomId={room}/>
+                  })  
+                }
+              </div>
+            </div>
           </div>
         </div>
       </div>
