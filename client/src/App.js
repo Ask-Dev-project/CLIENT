@@ -1,11 +1,10 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import ChatRoom from './pages/ChatRoom'
 import {
   Switch,
   Route
 } from "react-router-dom";
-import Forum from './pages/QuestionForum'
+import {Forum, ChatRoom, ProfilePage} from './pages'
 
 function App() {
   return (
@@ -20,6 +19,9 @@ function App() {
       </Route>
       <Route path='/post/:id'>
         <Forum />
+      </Route>
+      <Route path='/profile'>
+        <ProfilePage />
       </Route>
     </Switch>
     

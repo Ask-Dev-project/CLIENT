@@ -1,5 +1,4 @@
-import NavBar from '../components/NavBar'
-import CommentCard from '../components/CommentCard'
+import { CommentCard, NavBar } from '../components'
 
 export default function Forum(){
   return (
