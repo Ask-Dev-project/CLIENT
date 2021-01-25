@@ -32,9 +32,11 @@ function Room(){
   const otherUserId = useRef()
   const [ownVideoStart, setOwnVideoStart] = useState(false)
   const [partnerVideoStart, setPartnerVideoStart] = useState(false)
+
   const [allChat,setAllChat] = useState([])
   console.log(allChat, '<< top level');
   // const socket = io('http://localhost:3005')
+
   const peer = new Peer(undefined)
   const peers = {}
   const [input, setInput] = useState('')
