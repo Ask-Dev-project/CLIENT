@@ -1,12 +1,34 @@
-// import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 import {
+  BrowserRouter,
   Switch,
   Route
-} from "react-router-dom";
+} from 'react-router-dom'
+import './App.css';
+import Home from './components/Home'
+import Room from './components/Room'
+import Chat from './components/Chat'
 import {Forum, ChatRoom, ProfilePage} from './pages'
 
 function App() {
+  return(
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/">
+        <Home/>
+      </Route>
+      <Route path="/chat">
+        <Chat/>
+      </Route>
+      <Route path="/room/:id">
+        <Room/>
+      </Route>
+    </Switch>
+  </BrowserRouter>
+  )
+
+
+function App2() {
   return (
     <Switch>
       <Route exact path='/'>
@@ -26,6 +48,7 @@ function App() {
     </Switch>
     
   );
+
 }
 
 export default App;
