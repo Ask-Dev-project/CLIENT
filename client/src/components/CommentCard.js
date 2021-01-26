@@ -1,6 +1,6 @@
 import { Modal, Form, Button, NavLink} from 'react-bootstrap'
 import { useState } from 'react'
-import axios from 'axios'
+import axios from '../config/axios'
 
 export default function CommentCard(props) {
   const [show, setShow] = useState(false);
@@ -11,7 +11,7 @@ export default function CommentCard(props) {
     if(status === 'save-edit'){
       axios({
         method: 'POST',
-        url: `http://localhost:3005/${props.PostId}/${props.AnswerId}`,
+        url: `/${props.PostId}/${props.AnswerId}`,
         data: {
           description: comment
         }
@@ -29,7 +29,7 @@ export default function CommentCard(props) {
 
   function handleShow(e){
     e.preventDefault()
-    axios.get(`http://localhost:3005/answers/${props.PostId}/${props.AnswerId}`)
+    axios.get(`/answers/${props.PostId}/${props.AnswerId}`)
       .then(({data}) => {
         setComment(data)
         setShow(true);

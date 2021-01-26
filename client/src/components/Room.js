@@ -80,7 +80,7 @@ function Room(){
   // },[allChat])
 
   useEffect(() => {
-    socketRef.current = io.connect('http://localhost:3005')  // io.connect('https://ask-dev-server.herokuapp.com')
+    socketRef.current = io.connect('http://localhost:3005')
     socketRef.current.on('user-connected', userId => {
       otherUserId.current = userId
       socketRef.current.emit('give-my-id',{ownPeerId: ownPeerId.current,roomId:params.id})
@@ -147,7 +147,7 @@ function Room(){
     return () =>{
       console.log('cleanup function');
       socketRef.current.emit('stop-sharing',params.id)
-      socketRef.current.emit('leave-room',{roomId:params.id,name:localStorage.getItem('access_token')})
+      socketRef.current.emit('leave-room',{roomId:params.id,name:localStorage.getItem('nickname')})
       forceStopSharing()
       socketRef.current.disconnect()
     } 

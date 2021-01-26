@@ -3,15 +3,16 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { ResponseGoogle } from "../components";
 import GitHubLogin from "react-github-login";
-import axios from "axios";
+import axios from '../config/axios'
 
-const serverUrl = `http://localhost:3005`
 
 export default function NavBar() {
   const [isLogin,setIsLogin] = useState(false)
   const onSuccess = (res) => {
-    axios.get(`${serverUrl}/user/oauth-callback?code=${res.code}`)
+    console.log(res.code);
+    axios.get(`/user/oauth-callback?code=${res.code}`)
       .then(({data}) => {
+        console.log(data);
         localStorage.setItem('access_token', data.access_token)
         localStorage.setItem('nickname', data.nickname)
       })
