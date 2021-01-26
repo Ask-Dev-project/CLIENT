@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 import './App.css';
 import Room from './components/Room'
-import { ChatRoom, Home } from './pages'
+import { Home } from './pages'
 
 function App() {
   return(
@@ -15,9 +15,6 @@ function App() {
       </Route>
       <Route path="/room/:id">
         <Room/>
-      </Route>
-      <Route path="/chatRoom">
-        <ChatRoom/>
       </Route>
     </Switch>
   )

@@ -52,17 +52,26 @@ function Room(){
   }
 
   const forceStopSharing = () => {
-    if(ownVideoStart){
-      videoRef.current.srcObject.getTracks().forEach( track => {
-        track.stop()
-      })
-      socketRef.current.emit('stop-sharing',params.id)
+    console.log('masuk force stop');
+    if(videoRef.current){
+      if(videoRef.current.srcObject){
+        console.log('masuk force own video')
+        videoRef.current.srcObject.getTracks().forEach( track => {
+          track.stop()
+        })
+        // socketRef.current.emit('stop-sharing',params.id)
+        setOwnVideoStart(false)
+      }
     }
-    if(partnerVideoStart){
-      partnerVideoRef.current.srcObject.getTracks().forEach( track => {
-        track.stop()
-      })
-      socketRef.current.emit('stop-sharing',params.id)
+    if(partnerVideoRef.current){
+      if(partnerVideoRef.current.srcObject){
+        console.log('masuk force partner video')
+        partnerVideoRef.current.srcObject.getTracks().forEach( track => {
+          track.stop()
+        })
+        // socketRef.current.emit('stop-sharing',params.id)
+        setPartnerVideoStart(false)
+      }
     }
   }
 
@@ -71,7 +80,7 @@ function Room(){
   // },[allChat])
 
   useEffect(() => {
-    socketRef.current = io.connect('http://localhost:3005')
+    socketRef.current = io.connect('http://localhost:3005')  // io.connect('https://ask-dev-server.herokuapp.com')
     socketRef.current.on('user-connected', userId => {
       otherUserId.current = userId
       socketRef.current.emit('give-my-id',{ownPeerId: ownPeerId.current,roomId:params.id})
@@ -89,12 +98,13 @@ function Room(){
       console.log(userId, '<<< userId')
     })
     socketRef.current.on('stop-sharing', () => {
+      console.log('masuk stop sharing');
       forceStopSharing()
       // partnerVideoRef.current.srcObject.getTracks().forEach(track => {
       //   track.stop()
       // })
       // partnerVideoRef.current.srcObject = null
-      setPartnerVideoStart(false)
+      // setPartnerVideoStart(false)
     })
     socketRef.current.on('give-other-id',otherId => {
       otherUserId.current = otherId
@@ -123,7 +133,7 @@ function Room(){
               videoRef.current.srcObject = null
             }
             socketRef.current.emit('stop-sharing',params.id)
-            setOwnVideoStart(false)
+            // setOwnVideoStart(false)
           }
           call.answer(videoRef.current.srcObject)
           call.on('stream', otherVideoStream => {
@@ -134,9 +144,11 @@ function Room(){
     })
 
     return () =>{
-      socketRef.current.disconnect()
-      forceStopSharing()
+      console.log('cleanup function');
       socketRef.current.emit('stop-sharing',params.id)
+      socketRef.current.emit('leave-room',{roomId:params.id,name:localStorage.getItem('access_token')})
+      forceStopSharing()
+      socketRef.current.disconnect()
     } 
 
     // eslint-disable-next-line
@@ -166,7 +178,7 @@ function Room(){
         }
 
         socketRef.current.emit('stop-sharing',params.id)
-        setOwnVideoStart(false)
+        // setOwnVideoStart(false)
       }
         if(otherUserId.current){
           connectToNewuser()
@@ -177,6 +189,7 @@ function Room(){
 
   function send(){
     let newBubble = {
+      id: allChat.length+1,
       owner: localStorage.getItem('access_token'),
       message: input
     }
@@ -229,7 +242,7 @@ function Room(){
             {
               allChat.map((chat) => {
                 let owner = localStorage.getItem('access_token') === chat.owner ? 'me' : 'him'
-                return <ChatBubbles key={chat.message} typer={owner} msg={chat.message}/>
+                return <ChatBubbles key={chat.id} typer={owner} msg={chat.message}/>
               })
             }
           </ul>
@@ -258,7 +271,10 @@ function Room(){
               <button onClick={()=> {
                 console.log(ownPeerId);
                 console.log(otherUserId);
-                console.log(allChat)
+                // console.log(ownVideoStart)
+                // console.log(partnerVideoStart)
+                // console.log(videoRef.current.srcObject)
+                // console.log(partnerVideoRef.current.srcObject)
               }}>test</button>
                 <video ref={ videoRef } hidden={!ownVideoStart} style={{ height: '90%', width: '90%', backgroundColor: 'grey'}} muted autoPlay></video>
                 <video ref={ partnerVideoRef } hidden={!partnerVideoStart} style={{ height: '90%', width: '90%', backgroundColor: 'blueviolet'}} autoPlay></video>
