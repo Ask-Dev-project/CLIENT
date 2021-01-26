@@ -10,7 +10,7 @@ const rooms = [
   "1","2","3","4"
 ]
 // const posts = [1,2,3,4,5,6,7,8,9,10,11,12]
-
+const serverUrl = 'http://localhost:3005' // "https://ask-dev-server.herokuapp.com"
 function useQuery(){
   return new URLSearchParams(useLocation().search)
 }
@@ -25,21 +25,19 @@ function Home() {
     if(!init && query.get("category")){
       setLoadingPost(true)
       setPosts([])
-      axios.get(`http://localhost:3005/post/category?name=${query.get("category")}`,{
+      axios.get(`${serverUrl}/post/category?name=${query.get("category")}`,{
         data:{
           category: query.get("category")
         }
       })
         .then(({data}) => {
-          console.log(data)
           setPosts(data)
           setLoadingPost(false)
         }).catch(err => console.log(err))
     }else if(!query.get("category") && !init) {
       setPosts([])
-      axios.get('http://localhost:3005/post')
+      axios.get(`${serverUrl}/post`)
       .then(({data}) => {
-        console.log(data);
         setPosts(data)
         setLoadingPost(false)
         setInit(false)
@@ -48,9 +46,8 @@ function Home() {
     // eslint-disable-next-line
   },[query.get("category")])
   useEffect(()=>{
-    axios.get('http://localhost:3005/post')
+    axios.get(`${serverUrl}/post`)
       .then(({data}) => {
-        console.log(data);
         setPosts([])
         setPosts(posts.concat(data))
         setLoadingPost(false)

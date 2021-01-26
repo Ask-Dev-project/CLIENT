@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 import './App.css';
 import Room from './components/Room'
-import {Forum, ChatRoom, ProfilePage,Home} from './pages'
+import { Home } from './pages'
 
 function App() {
   return(
@@ -22,7 +22,6 @@ function App() {
       <Route path="/posts/:id">
         <Forum />
       </Route>
-      
     </Switch>
   )
 }
