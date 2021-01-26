@@ -4,6 +4,7 @@ import {
   Route
 } from 'react-router-dom'
 import './App.css';
+import './room.css'
 import Room from './components/Room'
 import { Home, Forum } from './pages'
 
