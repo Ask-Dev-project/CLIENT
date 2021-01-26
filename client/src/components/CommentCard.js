@@ -73,21 +73,26 @@ export default function CommentCard(props) {
 
   return (
     <>
-      <div className="col-12 mt-2">
-        <div className="card border-dark mb-3" style={{ maxWidth: "100rem" }}>
-          <div className="card-header">{props.name}</div>
-          <a href="#delete" onClick={handleShowDelModal}>
-            <i
-              className="fa fa-trash-o"
-              style={{
-                fontSize: "24px",
-                position: "absolute",
-                right: "70px",
-                top: "8px",
-              }}
-            ></i>
-          </a>
-          <Modal centered show={showDeleteModal} onHide={handleCloseDelModal}>
+    <div className='col-12 mt-2'>
+    <div className="card border-dark mb-3" style={{maxWidth: "100rem"}}>
+      <div className="card-header">{props.name}</div>
+    <a href="#delete" onClick={handleShowDelModal}><i className="fa fa-trash-o" style={{fontSize:"24px", position: 'absolute', right:'70px', top:'8px'}}></i></a>
+    <Modal centered show={showDeleteModal} onHide={handleCloseDelModal}>
+        <Modal.Header closeButton>
+          <Modal.Title style={{color:'red'}}>Notifications!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are You Sure?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDelModal}>
+            No
+          </Button>
+          <Button variant="primary" onClick={handleCloseDelModal}>
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    <a href="#edit" onClick={handleShow}><i className="fa fa-pencil-square-o" style={{fontSize:"24px",position: 'absolute', right:'16px', top:'10px'}}></i></a>
+      <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
               <Modal.Title style={{ color: "red" }}>Notifications!</Modal.Title>
             </Modal.Header>
@@ -150,6 +155,7 @@ export default function CommentCard(props) {
             <p className="card-text">{props.comment}</p>
           </div>
         </div>
+
       </div>
     </>
   );
