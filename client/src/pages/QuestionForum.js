@@ -33,9 +33,13 @@ export default function Forum(){
 
   function handleSubmit(e){
     e.preventDefault()
+    setLoading(true)
     axios({
       method: 'POST',
       url: `/answers/${params.id}`,
+      headers: {
+        access_token: localStorage.getItem('access_token')
+      },
       data: {
         description: inputPost
       }
@@ -45,6 +49,9 @@ export default function Forum(){
       })
       .catch(err => {
         console.log(err)
+      }).finally(_ => {
+        setInputPost('')
+        setLoading(false)
       })
   }
 
