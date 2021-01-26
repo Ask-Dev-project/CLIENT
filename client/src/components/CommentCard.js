@@ -50,6 +50,7 @@ export default function CommentCard(props) {
   function handleCloseDelModal(status) {
     setDeleteModalShow(false);
     if(status == 'yes'){
+      console.log('masukk delete');
       axios({
         method: "DELETE",
         url: `/answers/${props.PostId}/${props.AnswerId}`,
@@ -86,26 +87,11 @@ export default function CommentCard(props) {
           <Button variant="secondary" onClick={handleCloseDelModal}>
             No
           </Button>
-          <Button variant="primary" onClick={handleCloseDelModal}>
+          <Button variant="primary" onClick={() => handleCloseDelModal('yes')}>
             Yes
           </Button>
         </Modal.Footer>
       </Modal>
-    <a href="#edit" onClick={handleShow}><i className="fa fa-pencil-square-o" style={{fontSize:"24px",position: 'absolute', right:'16px', top:'10px'}}></i></a>
-      <Modal show={show} onHide={handleClose} centered>
-            <Modal.Header closeButton>
-              <Modal.Title style={{ color: "red" }}>Notifications!</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Are You Sure?</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleCloseDelModal}>
-                No
-              </Button>
-              <Button variant="primary" onClick={() => handleCloseDelModal('yes')}>
-                Yes
-              </Button>
-            </Modal.Footer>
-          </Modal>
           <a href="#edit" onClick={handleShow}>
             <i
               className="fa fa-pencil-square-o"
