@@ -9,7 +9,7 @@ export default function CardRoom(props) {
     // <div onClick={handleClick} className="btn bg-info rounded d-flex flex-column justify-items-center" style={{width:'100%',height:'50px',marginTop:'4px',marginBottom:'4px'}}>
     //   <h5>{props.roomId}</h5>
     // </div>
-    <div className="card mb-3" style={{width: "300px"}} onClick={handleClick}>
+    <div className="card mb-3" style={{width: "300px", height: '150px', marginTop: '10px'}} onClick={handleClick}>
       <div className="row g-0">
         <div className="col-md-4">
           <img src="https://cdn.iconscout.com/icon/free/png-512/account-profile-avatar-man-circle-round-user-30452.png" className='mt-3' alt="..." style={{width:'100px'}} />

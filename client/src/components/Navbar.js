@@ -37,8 +37,8 @@ export default function NavBar() {
       <NavLink
         exact
         to="/"
-        activeStyle={{ textDecoration: "underline" }}
-        className="btn"
+        activeStyle={{ fontWeight: "bold" }}
+        className="btn navbar-brand"
       >
         Home
       </NavLink>

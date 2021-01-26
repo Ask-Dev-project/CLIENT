@@ -7,7 +7,7 @@ export default function NavBar(){
     <>
     <Breadcrumb>
       <Breadcrumb.Item active>
-        <Link to='/'>Home</Link>
+        <Link className='navbar-brand' to='/'>Home</Link>
       </Breadcrumb.Item>
       <Breadcrumb.Item active>
         <Link to='/chat'>Chat page</Link>
