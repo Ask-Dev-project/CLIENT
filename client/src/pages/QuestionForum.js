@@ -1,7 +1,7 @@
 import { CommentCard, NavBar } from '../components'
 import { useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../config/axios'
 
 export default function Forum(){
   let params = useParams()
@@ -13,10 +13,10 @@ export default function Forum(){
 
   useEffect(() => {
     let post
-    axios.get(`http://localhost:3005/post/${params.id}`)
+    axios.get(`/post/${params.id}`)
       .then(({data})  => {
         post = data
-        return axios.get(`http://localhost:3005/answers/${params.id}`)
+        return axios.get(`/answers/${params.id}`)
       })
       .then(({data})  => {
         setPostData(post)
@@ -35,7 +35,7 @@ export default function Forum(){
     e.preventDefault()
     axios({
       method: 'POST',
-      url: `http://localhost:3005/answers/${params.id}`,
+      url: `/answers/${params.id}`,
       data: {
         description: inputPost
       }
