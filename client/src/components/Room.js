@@ -3,7 +3,7 @@ import {  useParams } from 'react-router-dom'
 import io from 'socket.io-client'
 import Peer from 'peerjs'
 import {ChatBubbles, NavBar} from '../components'
-import { Button } from 'react-bootstrap'
+import LoadingSpin from './LoadingSpin'
 
 // const chats = [
 //   {
@@ -33,6 +33,7 @@ function Room(){
   const otherUserId = useRef()
   const [ownVideoStart, setOwnVideoStart] = useState(false)
   const [partnerVideoStart, setPartnerVideoStart] = useState(false)
+  const [isLoading,setIsLoading] = useState(true)
 
   const [allChat,setAllChat] = useState([])
   // const allChat = useRef([])
@@ -115,7 +116,7 @@ function Room(){
       ownPeerId.current = id
       let jwt = localStorage.getItem('access_token')
       socketRef.current.emit('join-room', params.id, id,jwt)
-      console.log('masuk peer');
+      setIsLoading(false)
     })
     peer.on('call', call => {
       navigator.mediaDevices.getDisplayMedia({video:false,audio:false})
@@ -218,6 +219,7 @@ function Room(){
     peers[userId] = call
   }
 
+  if(isLoading) return <LoadingSpin/>
   return(
     <>
       <NavBar />
