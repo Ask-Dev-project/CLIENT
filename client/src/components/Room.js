@@ -54,10 +54,10 @@ function Room(){
   }
 
   const forceStopSharing = () => {
-    console.log('masuk force stop');
+    // console.log('masuk force stop');
     if(videoRef.current){
       if(videoRef.current.srcObject){
-        console.log('masuk force own video')
+        // console.log('masuk force own video')
         videoRef.current.srcObject.getTracks().forEach( track => {
           track.stop()
         })
@@ -67,7 +67,7 @@ function Room(){
     }
     if(partnerVideoRef.current){
       if(partnerVideoRef.current.srcObject){
-        console.log('masuk force partner video')
+        // console.log('masuk force partner video')
         partnerVideoRef.current.srcObject.getTracks().forEach( track => {
           track.stop()
         })
@@ -88,7 +88,7 @@ function Room(){
       socketRef.current.emit('give-my-id',{ownPeerId: ownPeerId.current,roomId:params.id})
     })
     socketRef.current.on('receive-chat',message => {
-      console.log(message);
+      // console.log(message);
       // console.log(allChat, '<<< dari receive');
       handleNewChat(message)
     })
@@ -100,7 +100,7 @@ function Room(){
       console.log(userId, '<<< userId')
     })
     socketRef.current.on('stop-sharing', () => {
-      console.log('masuk stop sharing');
+      // console.log('masuk stop sharing');
       forceStopSharing()
       // partnerVideoRef.current.srcObject.getTracks().forEach(track => {
       //   track.stop()
@@ -114,12 +114,13 @@ function Room(){
     
     peer.on('open', id => {
       ownPeerId.current = id
-      let jwt = localStorage.getItem('access_token')
-      socketRef.current.emit('join-room', params.id, id,jwt)
+      let nickname = localStorage.getItem('nickname')
+      socketRef.current.emit('join-room', params.id, id,nickname)
       setIsLoading(false)
     })
     peer.on('call', call => {
-      navigator.mediaDevices.getDisplayMedia({video:false,audio:false})
+      navigator.mediaDevices.getUserMedia({video:false,audio:true})
+      // navigator.mediaDevices.getDisplayMedia({video:false,audio:false})
         .then( stream => {
           videoRef.current.srcObject = stream
           return navigator.mediaDevices.getUserMedia({video:false,audio:true})
@@ -127,7 +128,8 @@ function Room(){
         .then( audioStream => {
           let audioTrack = audioStream.getAudioTracks()[0]
           videoRef.current.srcObject.addTrack(audioTrack)
-          videoRef.current.srcObject.getVideoTracks()[0].onended = () => {
+          // console.log(videoRef.current.srcObject.getTracks());
+          videoRef.current.srcObject.getTracks()[0].onended = () => {
             // videoRef.current.srcObject.getTracks().forEach(track => {
             //   track.stop()
             // })
@@ -147,7 +149,7 @@ function Room(){
     })
 
     return () =>{
-      console.log('cleanup function');
+      // console.log('cleanup function');
       socketRef.current.emit('stop-sharing',params.id)
       socketRef.current.emit('leave-room',{roomId:params.id,name:localStorage.getItem('nickname')})
       forceStopSharing()
@@ -226,15 +228,15 @@ function Room(){
 
      <div className="container content">
       <div className="col-md-4">
-                  <img src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-ICon.png" style={{width:'90px'}} alt="..." />
-                </div>
+        <img src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-ICon.png" style={{width:'90px'}} alt="..." />
+      </div>
       <div className="col-md-8">
-                  <div className="card-body">
-                    <h5 className="card-title">Alexander</h5>
-                    <p className="card-text">Junior developer</p>
-                    <p className="card-text"><small className="text-muted">javascript</small></p>
-                  </div>
-                </div>
+        <div className="card-body">
+          <h5 className="card-title">Alexander</h5>
+          <p className="card-text">Junior developer</p>
+          <p className="card-text"><small className="text-muted">javascript</small></p>
+        </div>
+      </div>
     <div className="row">
         <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"style={{marginRight:'5px'}}>
         	<div className="card"  >
@@ -303,7 +305,7 @@ function Room(){
             <div className="row justify-content-center align-items-center" style={{height:'100%'}}>
               <button className="btn btn-success" hidden={ownVideoStart || partnerVideoStart} onClick={startSharing}>start screen sharing</button>
               <span> </span>
-              <button button className="btn btn-success" onClick={()=> {
+              <button className="btn btn-success" onClick={()=> {
                 console.log(ownPeerId);
                 console.log(otherUserId);
                 console.log(allChat)
