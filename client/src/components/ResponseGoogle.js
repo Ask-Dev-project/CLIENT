@@ -6,6 +6,7 @@ const ResponseGoogle = async (res) => {
   // console.log(res.getAuthResponse().id_token);
   // console.log(res.profileObj);
   const id_token = res.getAuthResponse().id_token
+  console.log(id_token)
   try {
     const result = await axios({
       method: 'POST',
@@ -14,6 +15,7 @@ const ResponseGoogle = async (res) => {
       },
       url: 'http://localhost:3005/user/googleLogin'
     })
+    console.log(result);
     localStorage.setItem('access_token', result.data.access_token)
     localStorage.setItem('nickname', result.data.nickname)
   } catch (error) {
