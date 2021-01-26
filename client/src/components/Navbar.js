@@ -21,8 +21,9 @@ export default function NavBar() {
   };
   const onSuccess = (res) => {
     axios.get(`${serverUrl}/user/oauth-callback?code=${res.code}`)
-      .then(data => {
-        console.log(data)
+      .then(({data}) => {
+        localStorage.setItem('access_token', data.access_token)
+        localStorage.setItem('nickname', data.nickname)
       })
       .catch(err => {
         console.log(err)
