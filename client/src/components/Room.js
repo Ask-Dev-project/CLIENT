@@ -114,6 +114,7 @@ function Room(){
       ownPeerId.current = id
       let jwt = localStorage.getItem('access_token')
       socketRef.current.emit('join-room', params.id, id,jwt)
+      console.log('masuk peer');
     })
     peer.on('call', call => {
       navigator.mediaDevices.getDisplayMedia({video:false,audio:false})

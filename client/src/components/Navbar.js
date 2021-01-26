@@ -1,22 +1,33 @@
 import { Button } from "react-bootstrap";
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { ResponseGoogle } from "../components";
 import GitHubLogin from "react-github-login";
 import axios from "axios";
 
+const serverUrl = `http://localhost:3005`
+
 export default function NavBar() {
+  const [isLogin,setIsLogin] = useState(false)
   const githubLogin = async () => {
     try {
       await axios({
         method: "GET",
-        url: "http://localhost:3005/user/githubLogin",
+        url: `${serverUrl}/user/githubLogin`,
       });
     } catch (error) {
       console.log(error);
     }
   };
-  const onSuccess = (response) => {console.log(response)};
+  const onSuccess = (res) => {
+    axios.get(`${serverUrl}/user/oauth-callback?code=${res.code}`)
+      .then(data => {
+        console.log(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  };
   const onFailure = (response) => console.error(response);
   return (
     <nav
@@ -72,9 +83,11 @@ export default function NavBar() {
 
           <GitHubLogin
             clientId="07b7bf9b0666de61261d"
-            redirectUri="http://localhost:3005/user/githubLogin"
+            buttonText="Github"
             onSuccess={onSuccess}
             onFailure={onFailure}
+            valid={true}
+            redirectUri="http://localhost:3000"
           />
         </div>
       </div>
