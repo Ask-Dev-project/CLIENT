@@ -3,14 +3,12 @@ import { NavBar } from '../components'
 import CardPost from '../components/CardPost'
 import CardRoom from '../components/CardRoom'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../config/axios'
 import LoadingSpin from '../components/LoadingSpin'
 
 const rooms = [
   "1","2","3","4"
 ]
-// const posts = [1,2,3,4,5,6,7,8,9,10,11,12]
-const serverUrl = 'http://localhost:3005' // "https://ask-dev-server.herokuapp.com"
 function useQuery(){
   return new URLSearchParams(useLocation().search)
 }
@@ -25,7 +23,7 @@ function Home() {
     if(!init && query.get("category")){
       setLoadingPost(true)
       setPosts([])
-      axios.get(`${serverUrl}/post/category?name=${query.get("category")}`,{
+      axios.get(`/post/category?name=${query.get("category")}`,{
         data:{
           category: query.get("category")
         }
@@ -36,7 +34,7 @@ function Home() {
         }).catch(err => console.log(err))
     }else if(!query.get("category") && !init) {
       setPosts([])
-      axios.get(`${serverUrl}/post`)
+      axios.get(`/post`)
       .then(({data}) => {
         setPosts(data)
         setLoadingPost(false)
@@ -46,7 +44,7 @@ function Home() {
     // eslint-disable-next-line
   },[query.get("category")])
   useEffect(()=>{
-    axios.get(`${serverUrl}/post`)
+    axios.get(`/post`)
       .then(({data}) => {
         setPosts([])
         setPosts(posts.concat(data))
@@ -99,7 +97,7 @@ function Home() {
                 </div>
                 </div>
               </div>
-              <div className="col-3 bg-warning" style={{minHeight:'200px',gap:'7px'}}>
+              <div className="col-3" style={{minHeight:'200px',gap:'7px'}}>
                 {
                   rooms.map(room => {
                     return <CardRoom key={room} roomId={room}/>

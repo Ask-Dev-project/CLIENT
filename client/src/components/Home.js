@@ -34,7 +34,7 @@ function Home() {
               })
             }
           </div>
-          <div className="col-3 bg-warning" style={{minHeight:'200px',gap:'7px'}}>
+          <div className="col-3 bg-info" style={{minHeight:'200px',gap:'7px'}}>
             {
               rooms.map(room => {
                 return <CardRoom key={room} roomId={room}/>
