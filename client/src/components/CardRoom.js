@@ -35,21 +35,21 @@ export default function CardRoom(props) {
   },[])
 
   return (
-    <div className="card mb-3 rounded-pill" style={{width: "95%", minHeight: '100px', marginTop: '10px'}} onClick={handleClick}>
-      <div className="row g-0">
+    <div className="card mb-3 rounded" style={{width: "60%%", height: '80px'}} onClick={handleClick}>
+      <div className="row g-0 justify-content-center">
         {/* <div className="col-md-3 ">
           <img src="https://cdn.iconscout.com/icon/free/png-512/account-profile-avatar-man-circle-round-user-30452.png" className='mt-3' alt="..." style={{width:'100px'}} />
           <span> </span>
           
         </div> */}
-        <div className="col-md-8 ml-2 mx-auto">
-          <div className="card-body container" style={{justifyContent:'center'}}>
+        <div className="col-md-8 p-0">
+          <div className="d-flex flex-column card-body container p-0" style={{justifyContent:'center'}}>
             <h6 className="card-title" style={{textAlign:'center'}}>Room {props.roomId}</h6>
             {
               isRoomFull ? 
               <p className="card-text"><small className="text-muted">room is full</small></p>
               :
-              <Button className="mb-12 rounded-pill ml-4" style={{width:"100px", justifyContent:'center'}}  onClick={handleClick} >Join</Button>
+              <Button className="mb-12 rounded-pill" style={{width:"100%", justifyContent:'center'}}  onClick={handleClick} >Join</Button>
             }
             <span></span> 
             
