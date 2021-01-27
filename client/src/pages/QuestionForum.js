@@ -1,7 +1,9 @@
 import { CommentCard, NavBar } from '../components'
-import { useEffect, useState} from 'react'
+import React,{ useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import axios from '../config/axios'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import Editor from '@ckeditor/ckeditor5-build-classic'
 
 export default function Forum(){
   let params = useParams()
@@ -10,6 +12,7 @@ export default function Forum(){
   const [answerData, setAnswerData] = useState([])
   const [inputPost, setInputPost] = useState("")
   const [refreshKey, setRefreshKey] = useState(0)
+  // const [editorState, setEditorState] = React.useState(()=>EditorState.createEmpty())
 
   useEffect(() => {
     refetch()
@@ -68,9 +71,10 @@ export default function Forum(){
         </div>
         <hr />
         <div className="row">
-          <div className="col mt-3">
+          {/* <div className="col mt-3">
             {postData.description}
-          </div>
+          </div> */}
+          <div className="col mt-3" dangerouslySetInnerHTML={{ __html: postData.description }} />
           <small>#{postData.category}</small>
         </div>
         <div className="row mt-5">
@@ -84,9 +88,24 @@ export default function Forum(){
           <div className="col-12 mt-3">
             <h3>Comments</h3>
             <small className='mt-2'>Add your own comments here</small>
+            
             <form onSubmit={handleSubmit}>
             <div className="mt-4 form-floating">
-              <textarea onChange={handleChange} value={inputPost} className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{height: "100px"}}></textarea>
+              {/* <textarea onChange={handleChange} value={inputPost} className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{height: "100px"}}></textarea> */}
+              <CKEditor
+                  config={{placeholder: "comment ..."}} 
+                  editor={ Editor }
+                  data={inputPost}
+                  onReady={ editor => {
+                      // You can store the "editor" and use when it is needed.
+                      console.log( 'Editor is ready to use!', editor );
+                  } }
+                  onChange={ ( event, editor ) => {
+                      const data = editor.getData();
+                      setInputPost(data)
+                      console.log( { event, editor, data } );
+                  } }
+              />
             </div>
             <div className="col mt-3 mb-5">
               <button className='btn btn-primary btn-block'>Post</button>

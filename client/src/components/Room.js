@@ -245,173 +245,6 @@ function Room() {
     <>
       <NavBar />
 
-      {/* <div className="container content">
-        <div className="col-md-4">
-          <img
-            src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-ICon.png"
-            style={{ width: "90px" }}
-            alt="..."
-          />
-        </div>
-        <div className="col-md-8">
-          <div className="card-body">
-            <h5 className="card-title">Alexander</h5>
-            <p className="card-text">Junior developer</p>
-            <p className="card-text">
-              <small className="text-muted">javascript</small>
-            </p>
-          </div>
-        </div>
-        <div className="row">
-          <div
-            className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"
-            style={{ marginRight: "5px" }}
-          >
-            <div className="card">
-              <div className="card-header">Chat</div>
-              <div className="card-body height3">
-                <ul className="chat-list">
-                  {allChat.map((chat) => {
-                    let owner =
-                      localStorage.getItem("access_token") === chat.owner
-                        ? "me"
-                        : "him";
-                    return (
-                      <ChatBubbles
-                        key={chat.message}
-                        typer={owner}
-                        msg={chat.message}
-                      />
-                    );
-                  })}
-
-                  return(
-                  
-        					
-        					<li className="in">	
-                   key={chat.message} typer={owner} msg={chat.message}
-        					<div className="chat-body" >
-                 
-                    <div className="chat-img">
-        					<img alt="Avtar" src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-ICon.png" />
-                  
-                  </div>
-                  
-                  <div className="chat-message" >
-                  {chat.message} 
-        						</div>
-        					</div>
-        					</li>	
-                  
-                  
-                )
-                </ul>
-              </div>
-              <div className="footer mt-auto py-3 bg-light">
-                <div className="container-fluid">
-                  <div className="row">
-                    <div className="col-8 form-floating">
-                      <div className="input-group justify-between">
-                        <form
-                          style={{ position: "relative" }}
-                          onSubmit={(e) => {
-                            e.preventDefault();
-                            send();
-                          }}
-                        >
-                          <input
-                            value={input}
-                            onChange={handleChange}
-                            className="form-control "
-                            placeholder="message"
-                            id="floatingTextarea2"
-                            style={{
-                              display: "block",
-                              width: "200%",
-                              height: "60px",
-                              overflow: "hidden",
-                              resize: "both",
-                            }}
-                          ></input>
-                        </form>
-
-                        <button
-                          type="submit"
-                          style={{
-                            width: "100px",
-                            height: "50px",
-                            padding: "10px",
-                          }}
-                          onClick={send}
-                          className="btn btn-primary mr-5 mt-5"
-                        >
-                          send
-                        </button>
-                      </div>
-                      <button
-                        type="submit"
-                        style={{ width: "100px", margin: "auto" }}
-                        onClick={send}
-                        className="btn btn-primary mr-5 mt-5"
-                      >
-                        send
-                      </button>
-                    </div>
-                    <div className="col-4" style={{ width: "100px" }}></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-9">
-              <div
-                className="row justify-content-center align-items-center"
-                style={{ height: "100%" }}
-              >
-                <button
-                  className="btn btn-success"
-                  hidden={ownVideoStart || partnerVideoStart}
-                  onClick={startSharing}
-                >
-                  start screen sharing
-                </button>
-                <span> </span>
-                <button
-                  className="btn btn-success"
-                  onClick={() => {
-                    console.log(ownPeerId);
-                    console.log(otherUserId);
-                    console.log(allChat);
-                  }}
-                >
-                  test
-                </button>
-                <video
-                  ref={videoRef}
-                  hidden={!ownVideoStart}
-                  style={{
-                    height: "90%",
-                    width: "90%",
-                    backgroundColor: "grey",
-                  }}
-                  muted
-                  autoPlay
-                ></video>
-                <video
-                  ref={partnerVideoRef}
-                  hidden={!partnerVideoStart}
-                  style={{
-                    height: "90%",
-                    width: "90%",
-                    backgroundColor: "blueviolet",
-                  }}
-                  autoPlay
-                ></video>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
       <div className="container-fluid">
         <div className="ml-3">
           <div className="row mt-1">
@@ -434,6 +267,7 @@ function Room() {
                       </p>
                     </div>
                   </div>
+
                 </div>
               </div>
               <div className="row">
@@ -537,6 +371,9 @@ function Room() {
           </div>
         </div>
       </div>
+
+      </div>
+
     </>
   );
 }

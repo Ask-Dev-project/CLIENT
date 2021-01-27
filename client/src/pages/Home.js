@@ -62,6 +62,7 @@ function Home() {
         style={{ minWidth: "95vw", minHeight: "80vh" }}
       >
         <div className="row">
+
           <div className="col-2 " style={{ minHeight: "200px" }}>
             <div
               className="d-flex flex-column align-items-center"
@@ -113,6 +114,7 @@ function Home() {
                       C#
                     </NavLink>
                   </li>
+
                 </ul>
               </div>
             </div>

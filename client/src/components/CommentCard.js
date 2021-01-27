@@ -152,7 +152,8 @@ export default function CommentCard(props) {
           </Modal>
           <div className="card-body text-dark">
             <h5 className="card-title">{props.role}</h5>
-            <p className="card-text">{props.comment}</p>
+            {/* <p className="card-text">{props.comment}</p> */}
+            <div dangerouslySetInnerHTML={ { __html: props.comment } }></div>
           </div>
         </div>
         <div className="card-body text-dark">
