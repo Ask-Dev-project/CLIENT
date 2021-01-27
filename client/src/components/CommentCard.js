@@ -76,7 +76,9 @@ export default function CommentCard(props) {
     <>
     <div className='col-12 mt-2'>
     <div className="card border-dark mb-3" style={{maxWidth: "100rem"}}>
+
       <div className="card-header">{props.name}</div>
+
     <a href="#delete" onClick={handleShowDelModal}><i className="fa fa-trash-o" style={{fontSize:"24px", position: 'absolute', right:'70px', top:'8px'}}></i></a>
     <Modal centered show={showDeleteModal} onHide={handleCloseDelModal}>
         <Modal.Header closeButton>
@@ -141,7 +143,9 @@ export default function CommentCard(props) {
             <p className="card-text">{props.comment}</p>
           </div>
         </div>
-
+        <div className="card-body text-dark">
+          <h5 className="card-title">{props.role}</h5>
+        <p className="card-text">{props.comment}</p>
       </div>
     </>
   );

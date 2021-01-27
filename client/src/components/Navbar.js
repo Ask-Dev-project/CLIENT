@@ -1,4 +1,4 @@
-import { Button, Nav } from "react-bootstrap";
+import { Button, Nav, Modal, Form } from 'react-bootstrap'
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { ResponseGoogle } from "../components";
@@ -6,7 +6,15 @@ import GitHubLogin from "react-github-login";
 import axios from "../config/axios";
 
 export default function NavBar() {
-  const [isLogin, setIsLogin] = useState(false);
+
+  const [isLogin,setIsLogin] = useState(false)
+  const [show, setShow] = useState(false);
+  const [inputModal, setInputModal] = useState({
+    question: '',
+    description: '',
+    category:''
+  })
+
   const onSuccess = (res) => {
     console.log(res.code);
     axios
@@ -21,6 +29,41 @@ export default function NavBar() {
       });
   };
   const onFailure = (response) => console.error(response);
+
+  function handleChange(e){
+    setInputModal({...inputModal, [e.target.name]: e.target.value})
+  }
+
+  function handleClose(status){
+    setShow(false);
+    if (status === 'save-post'){
+      console.log(inputModal, '<<')
+      axios({
+        method: 'POST',
+        url: `/post`,
+        data: {
+          question: inputModal.question,
+          description: inputModal.description,
+          category: inputModal.category
+        },
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(_ => {
+          console.log('berhasil')
+        })
+        .err(err => {
+          console.log(err)
+        })
+    } 
+  }
+    function handleShow(){
+    setShow(true);
+
+  } 
+
+
   return (
     <nav
       className="navbar navbar-expand-lg justify-content-center"
@@ -34,64 +77,51 @@ export default function NavBar() {
       >
         Home
       </NavLink>
-      <h2
-        style={{ fontWeight: "bold", marginLeft: "500px", marginRight: "auto" }}
-      >
-        AskDev
-      </h2>
-      <div
-        className="rounded bg-danger ml-auto p-0 d-flex"
-        style={{ height: "50px", width: "200px" }}
-      >
-        <br></br>
-        <ResponseGoogle className="g-signin2" />
+      <Button variant="success" onClick={handleShow}>
+        Ask Q?
+      </Button>
 
-        <nav
-          className="navbar navbar-expand-lg justify-content-center"
-          style={{ backgroundColor: "#3399FF" }}
-        >
-          <NavLink
-            exact
-            to="/"
-            activeStyle={{ textDecoration: "underline" }}
-            className="btn"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="100"
-              height="30"
-              fill="currentColor"
-              className="bi bi-house-fill"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"
-              />
-              <path
-                fillRule="evenodd"
-                d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
-              />
-            </svg>
-          </NavLink>
-          <h2
-            style={{
-              fontWeight: "bold",
-              marginLeft: "500px",
-              marginRight: "auto",
-            }}
-          >
-            AskDev
-          </h2>
-          <h4
-            style={{ fontWeight: "bold", height: "20px", marginRight: "5px" }}
-          >
-            Login With:
-          </h4>
-          <Nav>
-            <Nav.Link>
-              <ResponseGoogle style={{ height: "auto" }} />
-            </Nav.Link>
+      <Modal centered show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>AskDev</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <Form>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>Question</Form.Label>
+                <Form.Control type="text" name="question" value={inputModal.question} onChange={handleChange} placeholder="Input Question" />
+            </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>Description</Form.Label>
+                <Form.Control as="textarea" name="description" value={inputModal.description} onChange={handleChange} placeholder="Input Description" />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect1">
+              <Form.Label>Select category</Form.Label>
+              <Form.Control as="select" custom name="category" onChange={handleChange}>
+                <option value="Javascript">Javascript</option>
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+                <option value="C++">C++</option>
+                <option value="C#">C#</option> 
+              </Form.Control>
+          </Form.Group>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={() => handleClose('close')}>
+                Close
+            </Button>
+            <Button variant="primary" onClick={() => handleClose('save-post')}>
+                Post
+            </Button>
+            </Modal.Footer>
+            </Form>
+            </Modal.Body>
+      </Modal>
+      <h2 style={{fontWeight:'bold',marginLeft:'500px',marginRight:'auto'}}>AskDev</h2>
+      <h4 style={{fontWeight:'bold',height:'20px',  marginRight:'5px'}}>Login With:</h4> 
+      <Nav>
+      <Nav.Link>
+      <ResponseGoogle style={{height:'auto'}} />
+      </Nav.Link>
 
             <Nav.Link href="/github">
               <Button variant="dark" style={{ height: "44px" }}>
