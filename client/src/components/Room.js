@@ -209,7 +209,7 @@ function Room() {
   function send() {
     let newBubble = {
       id: allChat.length + 1,
-      owner: localStorage.getItem("access_token"),
+      owner: localStorage.getItem("nickname"),
       message: input,
     };
     let newObj = {
@@ -219,6 +219,10 @@ function Room() {
     socketRef.current.emit("send-chat", newObj);
     setAllChat([...allChat, newBubble]);
     // allChat.current = [...allChat.current,newBubble]
+    setTimeout(() => {
+      let elemenchat = document.getElementById("chat-container")
+      elemenchat.scrollTop = elemenchat.scrollHeight
+    },100)
     setInput("");
   }
 
@@ -260,26 +264,22 @@ function Room() {
                   </div>
                   <div className="col-md-8">
                     <div className="card-body">
-                      <h5 className="card-title">Alexander</h5>
-                      <p className="card-text">Junior developer</p>
-                      <p className="card-text">
-                        <small className="text-muted">javascript</small>
-                      </p>
+                      {"Room Nusantara " + params.id}
                     </div>
                   </div>
 
                 </div>
               </div>
-              <div className="row">
+              <div className="row" id="chat-container" style={{height:'23rem',overflow:'auto'}}>
                 <ul>
                   {allChat.map((chat) => {
                     let owner =
-                      localStorage.getItem("access_token") === chat.owner
+                      localStorage.getItem("nickname") === chat.owner
                         ? "me"
                         : "him";
                     return (
                       <ChatBubbles
-                        nameUser={localStorage.getItem('nickname')}
+                        nameUser={chat.owner}
                         key={chat.id}
                         typer={owner}
                         msg={chat.message}
@@ -290,50 +290,53 @@ function Room() {
               </div>
               <div className="footer mt-auto py-3 bg-light">
                 <div className="container-fluid">
-                  <div className="row">
-                    <div className="col-8 form-floating">
-                      <form
+                  <div className="row align-items-center">
+                    <div className="form-floating">
+                      <form className="row"
                         onSubmit={(e) => {
                           e.preventDefault();
                           send();
                         }}
                       >
-                        <input
-                          value={input}
-                          onChange={handleChange}
-                          className="form-control"
-                          placeholder="message"
-                          id="floatingTextarea2"
-                          style={{ height: "80px" }}
-                        ></input>
+                        <div className="row d-flex flex-nowrap">
+                            <input
+                              autoComplete="off"
+                              value={input}
+                              onChange={handleChange}
+                              className="form-control"
+                              placeholder="message"
+                              id="floatingTextarea2"
+                              style={{ height: "40px",width:'18rem' }}
+                            ></input>
+                          <button
+                            type="submit"
+                            // onClick={send}
+                            className="btn btn-primary"
+                          >
+                            send
+                          </button>
+                        </div>
                       </form>
                     </div>
-                    <div className="col-1">
-                      <button
-                        type="submit"
-                        onClick={send}
-                        className="btn btn-primary mr-5 mt-5"
-                      >
-                        send
-                      </button>
+                    <div className="">
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-9">
+            <div className="col-9 rounded" style={{backgroundColor:'grey'}}>
               <div
                 className="row justify-content-center align-items-center"
                 style={{ height: "100%" }}
               >
                 <button
-                  className="btn btn-success"
+                  className="btn btn-primary"
                   hidden={ownVideoStart || partnerVideoStart}
                   onClick={startSharing}
                 >
                   start screen sharing
                 </button>
-                <button
+                <button hidden
                   onClick={() => {
                     console.log(ownPeerId);
                     console.log(otherUserId);
@@ -350,8 +353,7 @@ function Room() {
                   hidden={!ownVideoStart}
                   style={{
                     height: "90%",
-                    width: "90%",
-                    backgroundColor: "grey",
+                    width: "90%"
                   }}
                   muted
                   autoPlay
@@ -361,8 +363,7 @@ function Room() {
                   hidden={!partnerVideoStart}
                   style={{
                     height: "90%",
-                    width: "90%",
-                    backgroundColor: "blueviolet",
+                    width: "90%"
                   }}
                   autoPlay
                 ></video>
@@ -371,9 +372,6 @@ function Room() {
           </div>
         </div>
       </div>
-
-      </div>
-
     </>
   );
 }

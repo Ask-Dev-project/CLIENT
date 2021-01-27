@@ -6,6 +6,7 @@ export default function CommentCard(props) {
   const [show, setShow] = useState(false);
   const [showDeleteModal, setDeleteModalShow] = useState(false);
   const [comment, setComment] = useState("");
+  const [hideBtn] = useState(localStorage.getItem('nickname') === props.name ? false : true)
 
   function handleClose(status) {
     if (status === "save-edit") {
@@ -78,7 +79,7 @@ export default function CommentCard(props) {
         <div className="card border-dark mb-3" style={{ maxWidth: "100rem" }}>
           <div className="card-header">{props.name}</div>
 
-          <a href="#delete" onClick={handleShowDelModal}>
+          <a href="#delete" hidden={hideBtn} onClick={handleShowDelModal}>
             <i
               className="fa fa-trash-o"
               style={{
@@ -106,7 +107,7 @@ export default function CommentCard(props) {
               </Button>
             </Modal.Footer>
           </Modal>
-          <a href="#edit" onClick={handleShow}>
+          <a href="#edit" hidden={hideBtn} onClick={handleShow}>
             <i
               className="fa fa-pencil-square-o"
               style={{
@@ -155,10 +156,6 @@ export default function CommentCard(props) {
             {/* <p className="card-text">{props.comment}</p> */}
             <div dangerouslySetInnerHTML={ { __html: props.comment } }></div>
           </div>
-        </div>
-        <div className="card-body text-dark">
-          <h5 className="card-title">{props.role}</h5>
-          <p className="card-text">{props.comment}</p>
         </div>
       </div>
     </>

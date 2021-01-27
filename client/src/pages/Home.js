@@ -5,6 +5,7 @@ import CardRoom from "../components/CardRoom";
 import { useState, useEffect } from "react";
 import axios from "../config/axios";
 import LoadingSpin from "../components/LoadingSpin";
+import Banner from '../components/Banner'
 
 const rooms = ["1", "2", "3", "4"];
 function useQuery() {
@@ -57,6 +58,7 @@ function Home() {
   return (
     <>
       <NavBar refetch={refetch}/>
+      <Banner/>
       <div
         className="container"
         style={{ minWidth: "95vw", minHeight: "80vh" }}
@@ -68,7 +70,7 @@ function Home() {
               className="d-flex flex-column align-items-center"
               style={{ marginTop: "63px", width: "100%", gap: "7px" }}
             >
-              <div class="card bg-light" style={{ width: "15rem" }}>
+              <div className="card bg-light" style={{ width: "15rem" }}>
                 <ul className="list-group list-group-flush">
                   <li>
                     <NavLink exact to="/" className="btn list-group-item">

@@ -6,18 +6,20 @@ export default function CardRoom(props) {
   const [isRoomFull,setIsRoomFull] = useState(false)
   const history = useHistory()
   const handleClick = () => {
-    axios.get('/listRoom')
-      .then(({data}) => {
-        if(data[props.roomId]){
-          if(Object.keys(data[props.roomId]).length === 2){
-            setIsRoomFull(true)
+    if(localStorage.getItem('access_token')){
+      axios.get('/listRoom')
+        .then(({data}) => {
+          if(data[props.roomId]){
+            if(Object.keys(data[props.roomId]).length === 2){
+              setIsRoomFull(true)
+            }else{
+              history.push(`/room/${props.roomId}`)
+            }
           }else{
             history.push(`/room/${props.roomId}`)
           }
-        }else{
-          history.push(`/room/${props.roomId}`)
-        }
-      }).catch(err => console.log(err))
+        }).catch(err => console.log(err))
+    }
   }
 
   useEffect(() => {
