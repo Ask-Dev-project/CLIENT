@@ -147,7 +147,7 @@ function Home() {
               </div> */}
               <div className="col-3 mt-5" style={{ minHeight: "100%", gap: "7px"}}>
                 <div className="row">
-                  <h2 className="ml-5">CHAT ROOMS</h2>
+                  <h2 className="ml-5">Chat Rooms</h2>
                 </div>
                 {rooms.map((room) => {
                   return <CardRoom key={room} roomId={room} />;
