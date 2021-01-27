@@ -42,14 +42,14 @@ export default function CardRoom(props) {
           <span> </span>
           
         </div> */}
-        <div className="col-md-8 ml-2">
-          <div className="card-body">
-            <h6 className="mx-auto card-title">Room {props.roomId}</h6>
+        <div className="col-md-8 ml-2 mx-auto">
+          <div className="card-body container" style={{justifyContent:'center'}}>
+            <h6 className="card-title" style={{textAlign:'center'}}>Room {props.roomId}</h6>
             {
               isRoomFull ? 
               <p className="card-text"><small className="text-muted">room is full</small></p>
               :
-              <Button className="mb-12 mx-auto rounded-pill" style={{width:"100%", justifyContent:'center'}}  onClick={handleClick} >Join</Button>
+              <Button className="mb-12 rounded-pill ml-4" style={{width:"100px", justifyContent:'center'}}  onClick={handleClick} >Join</Button>
             }
             <span></span> 
             
