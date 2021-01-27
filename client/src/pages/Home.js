@@ -1,4 +1,4 @@
-import { Link, useLocation, NavLink } from "react-router-dom";
+import { useLocation, NavLink } from "react-router-dom";
 import { NavBar } from "../components";
 import CardPost from "../components/CardPost";
 import CardRoom from "../components/CardRoom";
@@ -7,7 +7,7 @@ import axios from "../config/axios";
 import LoadingSpin from "../components/LoadingSpin";
 import Banner from '../components/Banner'
 
-const rooms = ["1", "2", "3", "4"];
+const rooms = ["1", "2", "3", "4","5"];
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -41,6 +41,7 @@ function Home() {
   }, [query.get("category")]);
   useEffect(() => {
     refetch()
+    // eslint-disable-next-line
   }, []);
   const refetch = () => {
     axios

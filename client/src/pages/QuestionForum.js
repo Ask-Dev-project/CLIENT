@@ -7,7 +7,7 @@ import Editor from '@ckeditor/ckeditor5-build-classic'
 
 export default function Forum(){
   let params = useParams()
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
   const [postData, setPostData] = useState([])
   const [answerData, setAnswerData] = useState([])
   const [inputPost, setInputPost] = useState("")
@@ -16,11 +16,12 @@ export default function Forum(){
 
   useEffect(() => {
     refetch()
+    // eslint-disable-next-line
   }, [refreshKey])
   
-  function handleChange(e){
-    setInputPost(e.target.value)
-  }
+  // function handleChange(e){
+  //   setInputPost(e.target.value)
+  // }
   const refetch = () => {
     let post
     axios.get(`/post/${params.id}`)
@@ -38,7 +39,7 @@ export default function Forum(){
   }
   function handleSubmit(e){
     e.preventDefault()
-    setLoading(true)
+    // setLoading(true)
     axios({
       method: 'POST',
       url: `/answers/${params.id}`,
@@ -56,7 +57,7 @@ export default function Forum(){
         console.log(err)
       }).finally(_ => {
         setInputPost('')
-        setLoading(false)
+        // setLoading(false)
       })
   }
 
