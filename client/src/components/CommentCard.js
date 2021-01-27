@@ -13,7 +13,7 @@ export default function CommentCard(props) {
         method: "PUT",
         url: `/answers/${props.PostId}/${props.AnswerId}`,
         headers: {
-          access_token: localStorage.getItem('access_token')
+          access_token: localStorage.getItem("access_token"),
         },
         data: {
           description: comment,
@@ -21,7 +21,7 @@ export default function CommentCard(props) {
       })
         .then((_) => {
           setShow(false);
-          props.refetch()
+          props.refetch();
         })
         .catch((err) => {
           console.log(err);
@@ -49,18 +49,18 @@ export default function CommentCard(props) {
 
   function handleCloseDelModal(status) {
     setDeleteModalShow(false);
-    if(status == 'yes'){
-      console.log('masukk delete');
+    if (status == "yes") {
+      console.log("masukk delete");
       axios({
         method: "DELETE",
         url: `/answers/${props.PostId}/${props.AnswerId}`,
         headers: {
-          access_token: localStorage.getItem('access_token')
+          access_token: localStorage.getItem("access_token"),
         },
       })
         .then((_) => {
           setShow(false);
-          props.refetch()
+          props.refetch();
         })
         .catch((err) => {
           console.log(err);
@@ -74,26 +74,38 @@ export default function CommentCard(props) {
 
   return (
     <>
-    <div className='col-12 mt-2'>
-    <div className="card border-dark mb-3" style={{maxWidth: "100rem"}}>
+      <div className="col-12 mt-2">
+        <div className="card border-dark mb-3" style={{ maxWidth: "100rem" }}>
+          <div className="card-header">{props.name}</div>
 
-      <div className="card-header">{props.name}</div>
-
-    <a href="#delete" onClick={handleShowDelModal}><i className="fa fa-trash-o" style={{fontSize:"24px", position: 'absolute', right:'70px', top:'8px'}}></i></a>
-    <Modal centered show={showDeleteModal} onHide={handleCloseDelModal}>
-        <Modal.Header closeButton>
-          <Modal.Title style={{color:'red'}}>Notifications!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are You Sure?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseDelModal}>
-            No
-          </Button>
-          <Button variant="primary" onClick={() => handleCloseDelModal('yes')}>
-            Yes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          <a href="#delete" onClick={handleShowDelModal}>
+            <i
+              className="fa fa-trash-o"
+              style={{
+                fontSize: "24px",
+                position: "absolute",
+                right: "70px",
+                top: "8px",
+              }}
+            ></i>
+          </a>
+          <Modal centered show={showDeleteModal} onHide={handleCloseDelModal}>
+            <Modal.Header closeButton>
+              <Modal.Title style={{ color: "red" }}>Notifications!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Are You Sure?</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleCloseDelModal}>
+                No
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => handleCloseDelModal("yes")}
+              >
+                Yes
+              </Button>
+            </Modal.Footer>
+          </Modal>
           <a href="#edit" onClick={handleShow}>
             <i
               className="fa fa-pencil-square-o"
@@ -145,7 +157,8 @@ export default function CommentCard(props) {
         </div>
         <div className="card-body text-dark">
           <h5 className="card-title">{props.role}</h5>
-        <p className="card-text">{props.comment}</p>
+          <p className="card-text">{props.comment}</p>
+        </div>
       </div>
     </>
   );

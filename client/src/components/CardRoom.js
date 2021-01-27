@@ -32,7 +32,7 @@ export default function CardRoom(props) {
   },[])
 
   return (
-    <div className="card mb-3" style={{width: "300px", height: '150px', marginTop: '10px'}} onClick={handleClick}>
+    <div className="card mb-3 rounded-pill" style={{width: "95%", minHeight: '100px', marginTop: '10px'}} onClick={handleClick}>
       <div className="row g-0">
         <div className="col-md-3 ">
           <img src="https://cdn.iconscout.com/icon/free/png-512/account-profile-avatar-man-circle-round-user-30452.png" className='mt-3' alt="..." style={{width:'100px'}} />
@@ -46,7 +46,7 @@ export default function CardRoom(props) {
               isRoomFull ? 
               <p className="card-text"><small className="text-muted">room is full</small></p>
               :
-              <Button className="mb-12 " style={{width:"100px"}}  onClick={handleClick} >Join</Button>
+              <Button className="mb-12 ml-2 rounded-pill" style={{width:"100%"}}  onClick={handleClick} >Join</Button>
             }
             <span></span> 
             
