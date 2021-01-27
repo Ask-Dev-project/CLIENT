@@ -61,19 +61,19 @@ function Home() {
         <div className="row">
           <div className="col-2 " style={{minHeight:'200px'}}>
             <div className="d-flex flex-column align-items-center" style={{marginTop:'63px',width:'100%',gap:'7px'}}>
-              <div class="card bg-light" style={{width: "15rem"}}>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><NavLink exact to="/" className="btn">Programming Language</NavLink></li>
+              <div className="card bg-light" style={{width: "15rem"}}>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item"><NavLink exact to="/" className="btn">Programming Language</NavLink></li>
                   <hr style={{marginTop:'-1em'}}/>
-                  <li class="list-group-item"><NavLink to="?category=Javascript" className="btn">Javascript</NavLink></li>
+                  <li className="list-group-item"><NavLink to="?category=Javascript" className="btn">Javascript</NavLink></li>
                   <hr style={{marginTop:'-1em'}}/>
-                  <li class="list-group-item"><NavLink to="?category=Python" className="btn">Python</NavLink></li>
+                  <li className="list-group-item"><NavLink to="?category=Python" className="btn">Python</NavLink></li>
                   <hr style={{marginTop:'-1em'}}/>
-                  <li class="list-group-item"><NavLink to="?category=Java" className="btn">Java</NavLink></li>
+                  <li className="list-group-item"><NavLink to="?category=Java" className="btn">Java</NavLink></li>
                   <hr style={{marginTop:'-1em'}}/>
-                  <li class="list-group-item"><NavLink to="?category=Cpp" className="btn">C++</NavLink></li>
+                  <li className="list-group-item"><NavLink to="?category=Cpp" className="btn">C++</NavLink></li>
                   <hr style={{marginTop:'-1em'}}/>
-                  <li class="list-group-item"><NavLink to="?category=Cs" className="btn">C#</NavLink></li>
+                  <li className="list-group-item"><NavLink to="?category=Cs" className="btn">C#</NavLink></li>
                 </ul>
               </div>
             </div>
