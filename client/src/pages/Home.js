@@ -70,6 +70,9 @@ function Home() {
               className="d-flex flex-column align-items-center"
               style={{ marginTop: "63px", width: "100%", gap: "7px" }}
             >
+               {/* <div className="row">
+              <h2 className="display-4 ml-5">FORUM posting</h2>
+            </div> */}
               <div className="card bg-light" style={{ width: "15rem" }}>
                 <ul className="list-group list-group-flush">
                   <li>
@@ -122,11 +125,11 @@ function Home() {
             </div>
           </div>
           <div className="col-10">
-            <div className="row">
+            {/* <div className="row">
               <h2 className="display-4 ml-5">FORUM posting</h2>
-            </div>
+            </div> */}
             <div className="row">
-              <div className="col-9" style={{ minHeight: "200px" }}>
+              <div className="col-9 mt-5" style={{ minHeight: "200px" }}>
                 <div className="container">
                   <div className="row justify-content-center">
                     {loadingPost ? (
@@ -139,7 +142,13 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className="col-3" style={{ minHeight: "100%", gap: "7px"}}>
+              {/* <div className="row">
+                <h2 className="display-4 ml-5">FORUM posting</h2>
+              </div> */}
+              <div className="col-3 mt-5" style={{ minHeight: "100%", gap: "7px"}}>
+                <div className="row">
+                  <h2 className="display-4 ml-5">CHAT ROOMS</h2>
+                </div>
                 {rooms.map((room) => {
                   return <CardRoom key={room} roomId={room} />;
                 })}

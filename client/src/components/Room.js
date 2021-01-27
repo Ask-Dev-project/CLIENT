@@ -303,7 +303,7 @@ function Room() {
                               autoComplete="off"
                               value={input}
                               onChange={handleChange}
-                              className="form-control"
+                              className="form-control ml-3"
                               placeholder="message"
                               id="floatingTextarea2"
                               style={{ height: "40px",width:'18rem' }}
@@ -311,7 +311,7 @@ function Room() {
                           <button
                             type="submit"
                             // onClick={send}
-                            className="btn btn-primary"
+                            className="btn btn-primary ml-2"
                           >
                             send
                           </button>

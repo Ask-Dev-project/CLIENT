@@ -36,19 +36,19 @@ export default function CardRoom(props) {
   return (
     <div className="card mb-3 rounded-pill" style={{width: "95%", minHeight: '100px', marginTop: '10px'}} onClick={handleClick}>
       <div className="row g-0">
-        <div className="col-md-3 ">
+        {/* <div className="col-md-3 ">
           <img src="https://cdn.iconscout.com/icon/free/png-512/account-profile-avatar-man-circle-round-user-30452.png" className='mt-3' alt="..." style={{width:'100px'}} />
           <span> </span>
           
-        </div>
+        </div> */}
         <div className="col-md-8 ml-2">
           <div className="card-body">
-            <h6 className="card-title">Room {props.roomId}</h6>
+            <h6 className="mx-auto card-title">Room {props.roomId}</h6>
             {
               isRoomFull ? 
               <p className="card-text"><small className="text-muted">room is full</small></p>
               :
-              <Button className="mb-12 ml-2 rounded-pill" style={{width:"100%"}}  onClick={handleClick} >Join</Button>
+              <Button className="mb-12 mx-auto rounded-pill" style={{width:"100%", justifyContent:'center'}}  onClick={handleClick} >Join</Button>
             }
             <span></span> 
             
