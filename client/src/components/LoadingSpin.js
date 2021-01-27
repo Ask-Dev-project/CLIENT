@@ -3,7 +3,7 @@ import ReactLoading from 'react-loading'
 function LoadingSpin(){
 
   return(
-    <div className="row justify-content-center">
+    <div style={{marginTop: '25%'}}>
       <ReactLoading type="spin" color="##FF2D00"/>
     </div>
   )

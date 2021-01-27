@@ -8,6 +8,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react'
 // import Editor from '../ckeditor5/src/ckeditor'
 import Editor from '@ckeditor/ckeditor5-build-classic'
 
+
 export default function NavBar() {
   const [isLogin,setIsLogin] = useState(false)
   const [show, setShow] = useState(false);
@@ -33,39 +34,40 @@ export default function NavBar() {
   };
   const onFailure = (response) => console.error(response);
 
-  function handleChange(e){
-    setInputModal({...inputModal, [e.target.name]: e.target.value})
+  function handleChange(e) {
+    setInputModal({ ...inputModal, [e.target.name]: e.target.value });
   }
   function handleChangeEditor (e) {
     console.log(e)
   }
 
-  function handleClose(status){
+  function handleClose(status) {
     setShow(false);
+
     if (status === 'save-post'){
       axios({
-        method: 'POST',
+        method: "POST",
         url: `/post`,
         data: {
           question: inputModal.question,
           description: inputModal.description,
-          category: inputModal.category
+          category: inputModal.category,
         },
         headers: {
-          access_token: localStorage.getItem('access_token')
-        }
+          access_token: localStorage.getItem("access_token"),
+        },
       })
-        .then(_ => {
-          console.log('berhasil')
+        .then((_) => {
+          props.refetch()
+          console.log("berhasil");
         })
-        .err(err => {
-          console.log(err)
-        })
-    } 
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
-    function handleShow(){
+  function handleShow() {
     setShow(true);
-
   } 
   useEffect(()=>{
     if(localStorage.getItem('access_token')){
@@ -101,12 +103,19 @@ export default function NavBar() {
           <Modal.Title>AskDev</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form>
+          <Form>
             <Form.Group controlId="formBasicEmail">
-                <Form.Label>Question</Form.Label>
-                <Form.Control type="text" name="question" value={inputModal.question} onChange={handleChange} placeholder="Input Question" />
+              <Form.Label>Question</Form.Label>
+              <Form.Control
+                type="text"
+                name="question"
+                value={inputModal.question}
+                onChange={handleChange}
+                placeholder="Input Question"
+              />
             </Form.Group>
             <Form.Group controlId="formBasicEmail">
+
                 <Form.Label>Description</Form.Label>
                 {/* <Form.Control as="textarea" name="description" value={inputModal.description} onChange={handleChange} placeholder="Input Description" /> */}
                 {/* <Editor editorState={editorState} onChange={setEditorState}/>
@@ -128,26 +137,31 @@ export default function NavBar() {
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label>Select category</Form.Label>
+
               <Form.Control as="select" custom name="category" onChange={handleChange}>
                 
                 <option value="Javascript">Javascript</option>
                 <option value="Python">Python</option>
                 <option value="Java">Java</option>
                 <option value="C++">C++</option>
-                <option value="C#">C#</option> 
+                <option value="C#">C#</option>
               </Form.Control>
-          </Form.Group>
+            </Form.Group>
             <Modal.Footer>
-            <Button variant="secondary" onClick={() => handleClose('close')}>
+              <Button variant="secondary" onClick={() => handleClose("close")}>
                 Close
-            </Button>
-            <Button variant="primary" onClick={() => handleClose('save-post')}>
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => handleClose("save-post")}
+              >
                 Post
-            </Button>
+              </Button>
             </Modal.Footer>
-            </Form>
-            </Modal.Body>
+          </Form>
+        </Modal.Body>
       </Modal>
+
       <h2 style={{fontWeight:'bold',marginLeft:'25rem',marginRight:'auto'}}>AskDev</h2>
       {
         isLogin ?
@@ -201,5 +215,6 @@ export default function NavBar() {
               </Button>
             </Nav.Link> */}
         </nav>
+
   );
 }
