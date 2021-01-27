@@ -11,7 +11,8 @@ export default function CardPost(props) {
             <div className="card-body">
             <Link className="btn card-title" to={`/posts/${props.post.id}`} style={{fontWeight:'bold',maxWidth:'100%',textOverflow:'ellipsis',whiteSpace:'nowrap',overflow:'hidden'}}>{props.post.question}</Link>
               <h6 className="card-subtitle mb-2 text-muted">posted at: {props.post.createdAt.split('T')[0]} , by {props.post.User.nickname}, {props.post.Answers.length} answers</h6>
-              <p className='card-text' style={{maxWidth:'100%',textOverflow:'ellipsis',whiteSpace:'nowrap',overflow:'hidden'}}>{props.post.description}</p>
+              {/* <p className='card-text' style={{maxWidth:'100%',textOverflow:'ellipsis',whiteSpace:'nowrap',overflow:'hidden'}}>{props.post.description}</p> */}
+              <div className='card-text' style={{maxWidth:'100%',textOverflow:'ellipsis',whiteSpace:'nowrap',overflow:'hidden'}} dangerouslySetInnerHTML={ { __html: props.post.description } }></div>
             </div>
           </div>
   )

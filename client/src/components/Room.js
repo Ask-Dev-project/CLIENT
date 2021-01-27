@@ -100,7 +100,7 @@ function Room() {
     });
     socketRef.current.on("user-disconnect", (userId) => {
       if (peers[userId]) peers[userId].close();
-      console.log(userId, "<<< userId");
+      // console.log(userId, "<<< userId");
     });
     socketRef.current.on("stop-sharing", () => {
       // console.log('masuk stop sharing');

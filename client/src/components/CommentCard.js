@@ -1,4 +1,4 @@
-import { Modal, Form, Button, NavLink } from "react-bootstrap";
+import { Modal, Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import axios from "../config/axios";
 
@@ -50,7 +50,7 @@ export default function CommentCard(props) {
 
   function handleCloseDelModal(status) {
     setDeleteModalShow(false);
-    if (status == "yes") {
+    if (status === "yes") {
       console.log("masukk delete");
       axios({
         method: "DELETE",

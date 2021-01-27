@@ -19,7 +19,7 @@ export default function NavBar(props) {
   })
 
   const onSuccess = (res) => {
-    console.log(res.code);
+    // console.log(res.code);
     axios
       .get(`/user/oauth-callback?code=${res.code}`)
       .then(({ data }) => {
@@ -37,9 +37,9 @@ export default function NavBar(props) {
   function handleChange(e) {
     setInputModal({ ...inputModal, [e.target.name]: e.target.value });
   }
-  function handleChangeEditor (e) {
-    console.log(e)
-  }
+  // function handleChangeEditor (e) {
+  //   console.log(e)
+  // }
 
   function handleClose(status) {
     setShow(false);
@@ -59,7 +59,7 @@ export default function NavBar(props) {
       })
         .then((_) => {
           props.refetch()
-          console.log("berhasil");
+          // console.log("berhasil");
         })
         .catch((err) => {
           console.log(err);
@@ -126,12 +126,12 @@ export default function NavBar(props) {
                   data={inputModal.description}
                   onReady={ editor => {
                       // You can store the "editor" and use when it is needed.
-                      console.log( 'Editor is ready to use!', editor );
+                      // console.log( 'Editor is ready to use!', editor );
                   } }
                   onChange={ ( event, editor ) => {
                       const data = editor.getData();
                       setInputModal({...inputModal,description:data})
-                      console.log( { event, editor, data } );
+                      // console.log( { event, editor, data } );
                   } }
               />
             </Form.Group>

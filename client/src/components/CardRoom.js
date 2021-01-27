@@ -31,6 +31,7 @@ export default function CardRoom(props) {
           }
         }
       })
+      // eslint-disable-next-line
   },[])
 
   return (
