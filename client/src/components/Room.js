@@ -245,7 +245,7 @@ function Room() {
     <>
       <NavBar />
 
-      <div className="container content">
+      {/* <div className="container content">
         <div className="col-md-4">
           <img
             src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-ICon.png"
@@ -285,7 +285,7 @@ function Room() {
                     );
                   })}
 
-                  {/* return(
+                  return(
                   
         					
         					<li className="in">	
@@ -304,7 +304,7 @@ function Room() {
         					</li>	
                   
                   
-                ) */}
+                )
                 </ul>
               </div>
               <div className="footer mt-auto py-3 bg-light">
@@ -410,72 +410,133 @@ function Room() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      {/* <div className='container-fluid'>
-      <div className="ml-3">
-        <div className="row mt-1">
-          <div className="col-3">
-            <div className="mb-3" style={{maxWidth: "540px"}}>
-              <div className="row g-0">
-                <div className="col-md-4">
-                  <img src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-ICon.png" style={{width:'90px'}} alt="..." />
+      <div className="container-fluid">
+        <div className="ml-3">
+          <div className="row mt-1">
+            <div className="col-3">
+              <div className="mb-3" style={{ maxWidth: "540px" }}>
+                <div className="row g-0">
+                  <div className="col-md-4">
+                    <img
+                      src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-ICon.png"
+                      style={{ width: "90px" }}
+                      alt="..."
+                    />
+                  </div>
+                  <div className="col-md-8">
+                    <div className="card-body">
+                      <h5 className="card-title">Alexander</h5>
+                      <p className="card-text">Junior developer</p>
+                      <p className="card-text">
+                        <small className="text-muted">javascript</small>
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="col-md-8">
-                  <div className="card-body">
-                    <h5 className="card-title">Alexander</h5>
-                    <p className="card-text">Junior developer</p>
-                    <p className="card-text"><small className="text-muted">javascript</small></p>
+              </div>
+              <div className="row">
+                <ul>
+                  {allChat.map((chat) => {
+                    let owner =
+                      localStorage.getItem("access_token") === chat.owner
+                        ? "me"
+                        : "him";
+                    return (
+                      <ChatBubbles
+                        nameUser={localStorage.getItem('nickname')}
+                        key={chat.id}
+                        typer={owner}
+                        msg={chat.message}
+                      />
+                    );
+                  })}
+                </ul>
+              </div>
+              <div className="footer mt-auto py-3 bg-light">
+                <div className="container-fluid">
+                  <div className="row">
+                    <div className="col-8 form-floating">
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          send();
+                        }}
+                      >
+                        <input
+                          value={input}
+                          onChange={handleChange}
+                          className="form-control"
+                          placeholder="message"
+                          id="floatingTextarea2"
+                          style={{ height: "80px" }}
+                        ></input>
+                      </form>
+                    </div>
+                    <div className="col-1">
+                      <button
+                        type="submit"
+                        onClick={send}
+                        className="btn btn-primary mr-5 mt-5"
+                      >
+                        send
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className='row'>
-          <ul>
-            {
-              allChat.map((chat) => {
-                let owner = localStorage.getItem('access_token') === chat.owner ? 'me' : 'him'
-                return <ChatBubbles key={chat.id} typer={owner} msg={chat.message}/>
-              })
-            }
-          </ul>
-        </div>
-        <div className="footer mt-auto py-3 bg-light">
-        <div className="container-fluid">
-          <div className='row'>
-            <div className="col-8 form-floating">
-              <form onSubmit={(e)=>{
-                e.preventDefault()
-                send()
-              }}>
-                <input value={input} onChange={handleChange} className="form-control" placeholder="message" id="floatingTextarea2" style={{height: "80px"}}></input>
-              </form>
-            </div>
-            <div className='col-1'>
-              <button type='submit' onClick={send} className='btn btn-primary mr-5 mt-5'>send</button>
+            <div className="col-9">
+              <div
+                className="row justify-content-center align-items-center"
+                style={{ height: "100%" }}
+              >
+                <button
+                  className="btn btn-success"
+                  hidden={ownVideoStart || partnerVideoStart}
+                  onClick={startSharing}
+                >
+                  start screen sharing
+                </button>
+                <button
+                  onClick={() => {
+                    console.log(ownPeerId);
+                    console.log(otherUserId);
+                    // console.log(ownVideoStart)
+                    // console.log(partnerVideoStart)
+                    // console.log(videoRef.current.srcObject)
+                    // console.log(partnerVideoRef.current.srcObject)
+                  }}
+                >
+                  test
+                </button>
+                <video
+                  ref={videoRef}
+                  hidden={!ownVideoStart}
+                  style={{
+                    height: "90%",
+                    width: "90%",
+                    backgroundColor: "grey",
+                  }}
+                  muted
+                  autoPlay
+                ></video>
+                <video
+                  ref={partnerVideoRef}
+                  hidden={!partnerVideoStart}
+                  style={{
+                    height: "90%",
+                    width: "90%",
+                    backgroundColor: "blueviolet",
+                  }}
+                  autoPlay
+                ></video>
+              </div>
             </div>
           </div>
         </div>
       </div>
-          </div>
-          <div className='col-9'>
-            <div className="row justify-content-center align-items-center" style={{height:'100%'}}>
-              <button className="btn btn-success" hidden={ownVideoStart || partnerVideoStart} onClick={startSharing}>start screen sharing</button>
-              <button onClick={()=> {
-                console.log(ownPeerId);
-                console.log(otherUserId);
-                // console.log(ownVideoStart)
-                // console.log(partnerVideoStart)
-                // console.log(videoRef.current.srcObject)
-                // console.log(partnerVideoRef.current.srcObject)
-              }}>test</button>
-                <video ref={ videoRef } hidden={!ownVideoStart} style={{ height: '90%', width: '90%', backgroundColor: 'grey'}} muted autoPlay></video>
-                <video ref={ partnerVideoRef } hidden={!partnerVideoStart} style={{ height: '90%', width: '90%', backgroundColor: 'blueviolet'}} autoPlay></video>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div> */}
     </>
   );
 }
