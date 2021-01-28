@@ -66,7 +66,7 @@ export default function Forum(){
       <div className="container fluid mt-5">
         <div className="row">
           <div className="col">
-            <h1 className='display-3'>{postData.question}</h1>
+            <h1 className='display-8'>{postData.question}</h1>
           </div>
         </div>
         <hr />
@@ -86,7 +86,7 @@ export default function Forum(){
             })
           }
           <div className="col-12 mt-3">
-            <h3>Comments</h3>
+            <h3>Your Answer</h3>
             <small className='mt-2'>Add your own comments here</small>
             
             <form onSubmit={handleSubmit}>
@@ -108,7 +108,7 @@ export default function Forum(){
               />
             </div>
             <div className="col mt-3 mb-5">
-              <button className='btn btn-primary btn-block'>Post</button>
+              <button className='btn btn-primary btn-block' onClick={handleChange} >Post</button>
             </div>
             </form>
           </div>

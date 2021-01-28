@@ -37,7 +37,6 @@ export default function CardRoom(props) {
     <div className="card mb-3 rounded-pill" style={{width: "95%", minHeight: '100px', marginTop: '10px'}} onClick={handleClick}>
       <div className="row g-0">
         <div className="col-md-3 ">
-          <img src="https://cdn.iconscout.com/icon/free/png-512/account-profile-avatar-man-circle-round-user-30452.png" className='mt-3' alt="..." style={{width:'100px'}} />
           <span> </span>
           
         </div>

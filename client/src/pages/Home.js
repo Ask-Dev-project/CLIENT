@@ -123,7 +123,7 @@ function Home() {
           </div>
           <div className="col-10">
             <div className="row">
-              <h2 className="display-4 ml-5">FORUM posting</h2>
+              <h2 className="display-7 ml-5">Post Form</h2>
             </div>
             <div className="row">
               <div className="col-9" style={{ minHeight: "200px" }}>
