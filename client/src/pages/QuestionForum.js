@@ -87,7 +87,7 @@ export default function Forum(){
             })
           }
           <div className="col-12 mt-3">
-            <h3>Comments</h3>
+            <h3>Your Answer</h3>
             <small className='mt-2'>Add your own comments here</small>
             
             <form onSubmit={handleSubmit}>

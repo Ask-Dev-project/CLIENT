@@ -44,10 +44,11 @@ function Home() {
     // eslint-disable-next-line
   }, []);
   const refetch = () => {
+    setLoadingPost(true)
+    setPosts([]);
     axios
     .get(`/post`)
     .then(({ data }) => {
-      setPosts([]);
       setPosts(posts.concat(data));
       setLoadingPost(false);
       setInit(false);

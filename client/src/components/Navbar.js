@@ -23,7 +23,6 @@ export default function NavBar(props) {
     axios
       .get(`/user/oauth-callback?code=${res.code}`)
       .then(({ data }) => {
-        console.log(data);
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("nickname", data.nickname);
         setIsLogin(true)
