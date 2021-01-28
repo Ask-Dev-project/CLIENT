@@ -249,22 +249,15 @@ function Room() {
     <>
       <NavBar />
 
-      <div className="container-fluid">
-        <div className="ml-3">
-          <div className="row mt-1">
-            <div className="col-3">
+      <div className="container-fluid" >
+        <div className="ml-3" style={{minHeight:'100vh'}}>
+          <div className="row mt-1" style={{height:'100vh'}}>
+            <div className="col-3" >
               <div className="mb-3" style={{ maxWidth: "540px" }}>
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img
-                      src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-ICon.png"
-                      style={{ width: "90px" }}
-                      alt="..."
-                    />
-                  </div>
-                  <div className="col-md-8">
+                <div className="g-0">
+                  <div className="">
                     <div className="card-body">
-                      {"Room Nusantara " + params.id}
+                     <h2> {"Discussion Room " + params.id} </h2>
                     </div>
                   </div>
 
@@ -304,7 +297,7 @@ function Room() {
                               value={input}
                               onChange={handleChange}
                               className="form-control ml-3"
-                              placeholder="message"
+                              placeholder="Message"
                               id="floatingTextarea2"
                               style={{ height: "40px",width:'18rem' }}
                             ></input>
@@ -313,7 +306,7 @@ function Room() {
                             // onClick={send}
                             className="btn btn-primary ml-2"
                           >
-                            send
+                            Send
                           </button>
                         </div>
                       </form>
@@ -324,17 +317,17 @@ function Room() {
                 </div>
               </div>
             </div>
-            <div className="col-9 rounded" style={{backgroundColor:'grey'}}>
+            <div className="col-9 rounded" style={{paddingTop:'20px', marginBottom:'100px'}}>
               <div
                 className="row justify-content-center align-items-center"
-                style={{ height: "100%" }}
+                style={{ height: "100%", backgroundColor:'grey' }}
               >
                 <button
                   className="btn btn-primary"
                   hidden={ownVideoStart || partnerVideoStart}
                   onClick={startSharing}
                 >
-                  start screen sharing
+                  Start Screen Sharing
                 </button>
                 <button hidden
                   onClick={() => {

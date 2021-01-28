@@ -60,6 +60,7 @@ ul li{
 }
 
 .me{
+  margin-right: 20px;
   float: right;
   background: #0084ff;
   color: #fff;
