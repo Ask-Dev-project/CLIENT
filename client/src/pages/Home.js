@@ -44,16 +44,18 @@ function Home() {
     // eslint-disable-next-line
   }, []);
   const refetch = () => {
-    setLoadingPost(true)
     setPosts([]);
-    axios
-    .get(`/post`)
-    .then(({ data }) => {
-      setPosts(posts.concat(data));
-      setLoadingPost(false);
-      setInit(false);
-    })
-    .catch((err) => console.log(err));
+    setLoadingPost(true)
+    setTimeout(() => {
+      axios
+      .get(`/post`)
+      .then(({ data }) => {
+        setPosts(posts.concat(data));
+        setLoadingPost(false);
+        setInit(false);
+      })
+      .catch((err) => console.log(err));
+    },1000)
   // eslint-disable-next-line
   }
 
@@ -75,7 +77,7 @@ function Home() {
                {/* <div className="row">
               <h2 className="display-4 ml-5">FORUM posting</h2>
             </div> */}
-              <div className="card bg-light" style={{ width: "15rem", position:'-webkit-sticky', top:'0', position:'sticky' }}>
+              <div className="card bg-light" style={{ width: "15rem", top:'0', position:'sticky' }}>
                 <ul className="list-group list-group-flush">
                   <li>
                     <NavLink exact to="/" className="btn list-group-item">
@@ -148,7 +150,7 @@ function Home() {
                 <h2 className="display-4 ml-5">FORUM posting</h2>
               </div> */}
               <div className="col-3 mt-5" style={{ minHeight: "100%", gap: "7px"}}>
-                <div className="row">
+                <div className="row justify-content-center">
                   <h2 className="ml-5">Chat Rooms</h2>
                 </div>
                 {rooms.map((room) => {

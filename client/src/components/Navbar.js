@@ -99,7 +99,7 @@ export default function NavBar(props) {
 
       <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>AskDev</Modal.Title>
+          <Modal.Title></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -142,8 +142,8 @@ export default function NavBar(props) {
                 <option value="Javascript">Javascript</option>
                 <option value="Python">Python</option>
                 <option value="Java">Java</option>
-                <option value="C++">C++</option>
-                <option value="C#">C#</option>
+                <option value="Css">C++</option>
+                <option value="Cs">C#</option>
               </Form.Control>
             </Form.Group>
             <Modal.Footer>
@@ -161,7 +161,7 @@ export default function NavBar(props) {
         </Modal.Body>
       </Modal>
 
-      <h2 style={{fontWeight:'bold',marginLeft:'25rem',marginRight:'auto'}}>AskDev</h2>
+      <h2 style={{fontWeight:'bold',marginLeft:'25rem',marginRight:'auto'}}></h2>
       {
         isLogin ?
         <>
@@ -192,7 +192,7 @@ export default function NavBar(props) {
               onFailure={onFailure}
               valid={true}
               className="btn"
-              redirectUri="http://localhost:3000"
+              redirectUri="https://ask-dev-project.web.app"
             />
           </div>
         </>
