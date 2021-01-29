@@ -82,7 +82,8 @@ function Room() {
   // },[allChat])
 
   useEffect(() => {
-    socketRef.current = io.connect("http://localhost:3005");
+    // https://ask-dev-server.herokuapp.com/
+    socketRef.current = io.connect('https://ask-dev-server.herokuapp.com') // io.connect("http://localhost:3005");
     socketRef.current.on("user-connected", (userId) => {
       otherUserId.current = userId;
       socketRef.current.emit("give-my-id", {
@@ -270,7 +271,7 @@ function Room() {
 
                 </div>
               </div>
-              <div className="row" id="chat-container" style={{height:'23rem',overflow:'auto'}}>
+              <div className="row" id="chat-container" style={{height:'55vh',overflow:'auto'}}>
                 <ul>
                   {allChat.map((chat) => {
                     let owner =
